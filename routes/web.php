@@ -18,6 +18,8 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+
+// get user information using bearer token
 $router->get('/api/user', function(Request $request) {
     $user = $request->user();
     return $user->toArray();
@@ -29,4 +31,3 @@ $router->get('/welcome', function () use ($router){
 
 $router->post('/register','UsersController@register');
 
-// $router->get('/allstories', 'StoriesController@index');
