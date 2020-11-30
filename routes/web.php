@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\BookController;
+use Illuminate\Http\Request;
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -15,6 +16,11 @@ use App\Http\Controllers\BookController;
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+$router->get('/api/user', function(Request $request) {
+    $user = $request->user();
+    return $user->toArray();
 });
 
 $router->get('/welcome', function () use ($router){
