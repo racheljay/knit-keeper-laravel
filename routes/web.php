@@ -30,4 +30,6 @@ $router->get('/welcome', function () use ($router){
 });
 
 $router->post('/register','UsersController@register');
+$router->get('/index', 'ProjectsController@index');
+$router->get('projects/{user_id}', 'ProjectsController@filter');
 

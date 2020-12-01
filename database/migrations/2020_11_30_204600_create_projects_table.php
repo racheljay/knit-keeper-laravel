@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('project_name');
             $table->text('pattern_name');
-            $table->string('table_url');
+            $table->string('pattern_url');
             $table->integer('needle_size');
             $table->text('yarn');
             $table->timestamps();
