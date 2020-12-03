@@ -32,7 +32,17 @@ class UsersController extends Controller
         $data['name'] =  $user->name;
 
         return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true]);
-    }  
+    }
+    
+    public function delete(Request $request) 
+    {
+        $input = $request->all();
+        $user = User::findOrFail($input['id']);
+        // User::delete( $input['id']);
+        // dd($input);
+        $user->delete();
+        return response(['data' => $user, 'message' => 'Account deleted successfully!', 'status' => true]);
+    }
 
     public function sayHello(){
         return "Hello";

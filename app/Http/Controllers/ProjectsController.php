@@ -24,4 +24,16 @@ class ProjectsController extends Controller
         $project = Project::where('user_id', $user_id)->get();
         return $project;
     }
+
+    public function create() {
+        $project = new Project();
+        $project->user_id = request('user_id');
+        $project->project_name = request('project_name');
+        $project->pattern_name = request('pattern_name');
+        $project->pattern_url = request('pattern_url');
+        $project->needle_size = request('needle_size');
+        $project->yarn = request('yarn');
+
+        $project->save();
+    }
 }

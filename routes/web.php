@@ -33,3 +33,6 @@ $router->post('/register','UsersController@register');
 $router->get('/index', 'ProjectsController@index');
 $router->get('projects/{user_id}', 'ProjectsController@filter');
 
+$router->post('/add-project', 'ProjectsController@create');
+
+$router->delete('/delete-user', 'UsersController@delete');
