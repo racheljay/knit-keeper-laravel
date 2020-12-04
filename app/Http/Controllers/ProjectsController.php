@@ -36,4 +36,11 @@ class ProjectsController extends Controller
 
         $project->save();
     }
+
+    public function delete(Request $request){
+        $input = $request->all();
+        $project = Project::findOrFail($input['id']);
+        $project->delete();
+        return response(['data' => $project, 'message' => 'Project deleted successfully!', 'status' => true]);
+    }
 }
