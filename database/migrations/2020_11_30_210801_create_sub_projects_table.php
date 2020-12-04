@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateSubProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('sub_projects', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            // $table->date('dob');
-            $table->string('email');
-            $table->string('password');
-            $table->timestamp('last_logged_in')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            
+            $table->unsignedBigInteger('project_id');
+            $table->text('name');
+            $table->integer('count');
+            $table->text('notes');
             $table->timestamps();
+
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 
@@ -33,6 +32,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('sub_projects');
     }
 }

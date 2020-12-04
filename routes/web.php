@@ -1,5 +1,8 @@
 <?php
+
 use App\Http\Controllers\BookController;
+use Illuminate\Http\Request;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -17,10 +20,32 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/welcome', function () use ($router){
+
+// get user information using bearer token
+$router->get('/api/user', function (Request $request) {
+    $user = $request->user();
+    return $user->toArray();
+});
+
+$router->get('/welcome', function () use ($router) {
     return "Hello World";
 });
 
-$router->post('/register','UsersController@register');
+$router->post('/register', 'UsersController@register');
 
-// $router->get('/allstories', 'StoriesController@index');
+$router->get('/seeallprojects', 'ProjectsController@index');
+$router->get('/seeallsubprojects', 'Sub_ProjectsController@index');
+
+$router->group(['middleware' => 'auth'], function () use ($router) {
+
+    $router->get('sub_projects/{project_id}', 'Sub_ProjectsController@filter');
+
+    $router->get('projects/{user_id}', 'ProjectsController@filter');
+
+    $router->post('/add-project', 'ProjectsController@create');
+
+    $router->delete('/delete-user', 'UsersController@delete');
+    $router->get('/logout', 'UsersController@logout');
+
+    $router->delete('/delete-project', 'ProjectsController@delete');
+});
