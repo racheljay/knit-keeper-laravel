@@ -36,6 +36,14 @@ $router->post('/register', 'UsersController@register');
 $router->get('/seeallprojects', 'ProjectsController@index');
 $router->get('/seeallsubprojects', 'Sub_ProjectsController@index');
 
+$router->delete('/delete-user', 'UsersController@delete');
+
+$router->put('edit-project/{id}', 'ProjectsController@update');
+$router->put('edit-subproject/{id}', 'Sub_ProjectsController@update');
+
+$router->post('/add-sub-project', 'Sub_ProjectsController@create');
+
+
 $router->group(['middleware' => 'auth'], function () use ($router) {
 
     $router->get('sub_projects/{project_id}', 'Sub_ProjectsController@filter');
@@ -44,7 +52,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 
     $router->post('/add-project', 'ProjectsController@create');
 
-    $router->delete('/delete-user', 'UsersController@delete');
     $router->get('/logout', 'UsersController@logout');
 
     $router->delete('/delete-project', 'ProjectsController@delete');

@@ -43,4 +43,16 @@ class ProjectsController extends Controller
         $project->delete();
         return response(['data' => $project, 'message' => 'Project deleted successfully!', 'status' => true]);
     }
+
+    public function update($id) {
+        $project = Project::findOrFail($id);
+        $project->project_name = request('project_name');
+        $project->pattern_name = request('pattern_name');
+        $project->pattern_url = request('pattern_url');
+        $project->needle_size = request('needle_size');
+        $project->yarn = request('yarn');
+        $project->save();
+
+        return response(['data' => $project, 'message' => 'Project updated successfully!', 'status' => true]);
+    }
 }

@@ -17,5 +17,14 @@ class Sub_ProjectsController extends Controller
         return $sub_project;
     }
 
+    public function create() {
+        $sub_project = new Sub_Project();
+        $sub_project->project_id = request('project_id');
+        $sub_project->name = request('name');
+        $sub_project->count = request('count');
+        $sub_project->notes = request('notes');
+        $sub_project->save();
+    }
+
 
 }
