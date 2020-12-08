@@ -25,7 +25,8 @@ class ProjectsController extends Controller
         return $project;
     }
 
-    public function create() {
+    public function create(Request $request)
+    {
         $project = new Project();
         $project->user_id = request('user_id');
         $project->project_name = request('project_name');
@@ -35,12 +36,33 @@ class ProjectsController extends Controller
         $project->yarn = request('yarn');
 
         $project->save();
+        return Project::where('user_id', $request->user()->id)->get();
+
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $input = $request->all();
         $project = Project::findOrFail($input['id']);
         $project->delete();
-        return response(['data' => $project, 'message' => 'Project deleted successfully!', 'status' => true]);
+        $allProjects = Project::where('user_id', $request->user()->id)->get();
+        return response(['data' => $allProjects, 'message' => 'Project deleted successfully!', 'status' => true]);
+
+
+    }
+
+    public function update($id, Request $request)
+    {
+        $project = Project::findOrFail($id);
+        $project->project_name = request('project_name');
+        $project->pattern_name = request('pattern_name');
+        $project->pattern_url = request('pattern_url');
+        $project->needle_size = request('needle_size');
+        $project->yarn = request('yarn');
+        $project->save();
+        $allProjects = Project::where('user_id', $request->user()->id)->get();
+
+
+        return response(['data' => $allProjects, 'message' => 'Project updated successfully!', 'status' => true]);
     }
 }
