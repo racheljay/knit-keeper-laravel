@@ -24,6 +24,7 @@ class Sub_ProjectsController extends Controller
         $sub_project->count = request('count');
         $sub_project->notes = request('notes');
         $sub_project->save();
+        
     }
 
     public function show($id)
@@ -41,5 +42,16 @@ class Sub_ProjectsController extends Controller
         $sub_project->save();
 
         return response(['data' => $sub_project, 'message' => 'Section updated successfully!', 'status' => true]);
+    }
+
+    public function delete(Request $request)
+    {
+        $input = $request->all();
+        $sub_project = Sub_Project::findOrFail($input['id']);
+        $sub_project->delete();
+        // $allSubProjects = Sub_Project::where('project_id', $request->project()->id->get());
+        // return response(['data' => $allSubProjects, 'message' => 'Section deleted successfully!', 'status' => true]);
+
+
     }
 }

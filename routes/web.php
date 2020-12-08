@@ -55,6 +55,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->put('edit-subproject/{id}', 'Sub_ProjectsController@update');
     
     $router->delete('/delete-project', 'ProjectsController@delete');
+    $router->delete('/delete-sub-project', 'Sub_ProjectsController@delete');
+
 
 
 

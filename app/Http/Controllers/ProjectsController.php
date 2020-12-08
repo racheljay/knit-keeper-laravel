@@ -36,9 +36,7 @@ class ProjectsController extends Controller
         $project->yarn = request('yarn');
 
         $project->save();
-        $allProjects = Project::where('user_id', $request->user()->id)->get();
-        return response(['data' => $allProjects, 'message' => 'Project created successfully!', 'status' => true]);
-
+        return Project::where('user_id', $request->user()->id)->get();
 
     }
 

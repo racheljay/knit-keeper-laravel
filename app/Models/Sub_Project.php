@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,8 +14,10 @@ class Sub_Project extends Model
     public $incrementing = true;
     public $timestamps = true;
 
-    public function projects()
+    public function project()
     {
         return $this->belongsTo('App\Models\Project');
     }
+
+
 }
