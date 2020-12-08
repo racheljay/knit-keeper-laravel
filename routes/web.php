@@ -21,11 +21,7 @@ $router->get('/', function () use ($router) {
 });
 
 
-// get user information using bearer token
-$router->get('/api/user', function (Request $request) {
-    $user = $request->user();
-    return $user->toArray();
-});
+
 
 $router->get('/welcome', function () use ($router) {
     return "Hello World";
@@ -36,23 +32,32 @@ $router->post('/register', 'UsersController@register');
 $router->get('/seeallprojects', 'ProjectsController@index');
 $router->get('/seeallsubprojects', 'Sub_ProjectsController@index');
 
-$router->delete('/delete-user', 'UsersController@delete');
-
-$router->put('edit-project/{id}', 'ProjectsController@update');
-$router->put('edit-subproject/{id}', 'Sub_ProjectsController@update');
-
-$router->post('/add-sub-project', 'Sub_ProjectsController@create');
-
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
-
-    $router->get('sub_projects/{project_id}', 'Sub_ProjectsController@filter');
-
-    $router->get('projects/{user_id}', 'ProjectsController@filter');
-
-    $router->post('/add-project', 'ProjectsController@create');
+    // get user information using bearer token
+    
+    $router->get('/api/user', function (Request $request) {
+        $user = $request->user();
+        return $user->toArray();
+    });
+    $router->get('/getUserData', 'UsersController@index');
 
     $router->get('/logout', 'UsersController@logout');
+    $router->delete('/delete-user', 'UsersController@delete');
 
+    $router->get('projects/{user_id}', 'ProjectsController@filter');
+    $router->get('sub_projects/{project_id}', 'Sub_ProjectsController@filter');
+    
+    $router->post('/add-project', 'ProjectsController@create');
+    $router->post('/add-sub-project', 'Sub_ProjectsController@create');
+
+    $router->put('edit-project/{id}', 'ProjectsController@update');
+    $router->put('edit-subproject/{id}', 'Sub_ProjectsController@update');
+    
     $router->delete('/delete-project', 'ProjectsController@delete');
+
+
+
+
 });
+// $router->get('/show-sub-project/{id}', 'Sub_ProjectsController@show');

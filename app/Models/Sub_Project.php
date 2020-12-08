@@ -12,4 +12,9 @@ class Sub_Project extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = true;
+
+    public function projects()
+    {
+        return $this->belongsTo('App\Models\Project');
+    }
 }

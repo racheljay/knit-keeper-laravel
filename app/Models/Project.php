@@ -12,4 +12,15 @@ class Project extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = true;
+    protected $with = ['sub_projects'];
+
+    public function sub_projects()
+    {
+        return $this->hasMany('App\Models\Sub_Project');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

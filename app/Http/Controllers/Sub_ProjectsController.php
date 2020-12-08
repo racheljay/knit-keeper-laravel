@@ -26,5 +26,20 @@ class Sub_ProjectsController extends Controller
         $sub_project->save();
     }
 
+    public function show($id)
+    {
+        $sub_project = Sub_Project::findOrFail($id);
+        return $sub_project;
+    }
 
+    public function update($id)
+    {
+        $sub_project = Sub_Project::findOrFail($id);
+        $sub_project->name = request('name');
+        $sub_project->count = request('count');
+        $sub_project->notes = request('notes');
+        $sub_project->save();
+
+        return response(['data' => $sub_project, 'message' => 'Section updated successfully!', 'status' => true]);
+    }
 }

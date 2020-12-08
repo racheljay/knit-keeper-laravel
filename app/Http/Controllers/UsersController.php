@@ -53,6 +53,17 @@ class UsersController extends Controller
         return response($response, 200);
     }
 
+    public function index (Request $request) {
+        // $input = $request->all();
+        // return User::findOrFail($input['id'])->with(['projects', 'sub_projects']);
+        $user = $request->user();
+        // dd($user->id);
+        // $allUserData = $user->with(['projects']);
+        $allUserData = User::where('id', $user->id)->with(['projects'])->get();
+        // dd($allUserData);
+        return $allUserData;
+    }
+
     public function sayHello()
     {
         return "Hello";
