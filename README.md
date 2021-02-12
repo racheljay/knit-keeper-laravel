@@ -2,6 +2,8 @@
 
 Project hosted [here](https://knit-keeper-30b32.web.app/)
 
+[Frontend Repo](https://github.com/racheljay/knit-keeper-react)
+
 ## Introduction/ Background:
 Knit Keeper is a full stack web application that implements user authentication and CRUD functionality. It is built with a React front end and a Laravel/ Lumen back end.
 
